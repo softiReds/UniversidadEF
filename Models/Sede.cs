@@ -10,7 +10,4 @@ public class Sede
     public int RectorId { get; set; }
 
     public virtual Rector Rector { get; set; }
-
-    [JsonIgnore]
-    public virtual ICollection<Facultad> Facultades { get; set; }
 }
