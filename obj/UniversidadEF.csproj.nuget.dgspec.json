@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\santi\\OneDrive\\Documentos\\SantiagoRojas\\Estudio\\Proyectos\\C#\\UniversidadEF\\UniversidadEF.csproj": {}
+    "c:\\Users\\santi\\OneDrive\\Documentos\\SantiagoRojas\\Estudio\\Proyectos\\C#\\UniversidadEF\\UniversidadEF.csproj": {}
   },
   "projects": {
-    "C:\\Users\\santi\\OneDrive\\Documentos\\SantiagoRojas\\Estudio\\Proyectos\\C#\\UniversidadEF\\UniversidadEF.csproj": {
+    "c:\\Users\\santi\\OneDrive\\Documentos\\SantiagoRojas\\Estudio\\Proyectos\\C#\\UniversidadEF\\UniversidadEF.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\santi\\OneDrive\\Documentos\\SantiagoRojas\\Estudio\\Proyectos\\C#\\UniversidadEF\\UniversidadEF.csproj",
+        "projectUniqueName": "c:\\Users\\santi\\OneDrive\\Documentos\\SantiagoRojas\\Estudio\\Proyectos\\C#\\UniversidadEF\\UniversidadEF.csproj",
         "projectName": "UniversidadEF",
-        "projectPath": "C:\\Users\\santi\\OneDrive\\Documentos\\SantiagoRojas\\Estudio\\Proyectos\\C#\\UniversidadEF\\UniversidadEF.csproj",
+        "projectPath": "c:\\Users\\santi\\OneDrive\\Documentos\\SantiagoRojas\\Estudio\\Proyectos\\C#\\UniversidadEF\\UniversidadEF.csproj",
         "packagesPath": "C:\\Users\\santi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\santi\\OneDrive\\Documentos\\SantiagoRojas\\Estudio\\Proyectos\\C#\\UniversidadEF\\obj\\",
+        "outputPath": "c:\\Users\\santi\\OneDrive\\Documentos\\SantiagoRojas\\Estudio\\Proyectos\\C#\\UniversidadEF\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\santi\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -40,6 +40,22 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
