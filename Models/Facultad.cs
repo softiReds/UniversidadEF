@@ -1,7 +1,12 @@
+using System.Text.Json.Serialization;
+
 namespace UniversidadEf.Models;
 
 public class Facultad
 {
-    public int FaculadId { get; set; }
-    public string FacultadDescripcion { get; set; }
+    public int FacultadId { get; set; }
+    public string FacultadNombre { get; set; }
+
+    [JsonIgnore]
+    public ICollection<Carrera> Carreras { get; set; }
 }

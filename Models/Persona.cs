@@ -7,6 +7,7 @@ public class Persona
     public string PersonaApellido { get; set; }
     public string PersonaCiudad { get; set; }
     public int PersonaTelefono { get; set; }
+    public string PersonaCorreo { get; set; }
     public DateTime PersonaFechaNacimiento { get; set; }
-    public char Genero { get; set; }
+    public char PersonaGenero { get; set; }
 }

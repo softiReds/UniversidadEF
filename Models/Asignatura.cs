@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace UniversidadEf.Models;
 
 public class Asignatura
@@ -8,4 +10,7 @@ public class Asignatura
     public int ProfesorId { get; set; }
 
     public virtual Profesor Profesor { get; set; }
+
+    [JsonIgnore]
+    public virtual ICollection<AlumnoAsignatura> AlumnoAsignaturas { get; set; }
 }
