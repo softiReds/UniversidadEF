@@ -25,7 +25,7 @@ public class UniversidadContext : DbContext
 
             alumno.HasKey(e => e.AlumnoId);
 
-            alumno.Property(e => e.AlumnoDocumento).IsRequired();
+            alumno.HasOne(e => e.Persona).WithOne(e => e.Alumno).HasForeignKey<Alumno>(e => e.AlumnoDocumento);
         });
 
         modelBuilder.Entity<AlumnoAsignatura>(alumnoAsignatura =>
@@ -90,7 +90,7 @@ public class UniversidadContext : DbContext
 
             profesor.HasKey(e => e.ProfesorId);
 
-            profesor.Property(e => e.ProfesorDocumento).IsRequired();
+            profesor.HasOne(e => e.Persona).WithOne(e => e.Profesor).HasForeignKey<Profesor>(e => e.ProfesorDocumento);
         });
 
         modelBuilder.Entity<Rector>(rector =>
@@ -99,7 +99,7 @@ public class UniversidadContext : DbContext
 
             rector.HasKey(e => e.RectorId);
 
-            rector.Property(e => e.RectorDocumento).IsRequired();
+            rector.HasOne(e => e.Persona).WithOne(e => e.Rector).HasForeignKey<Rector>(e => e.RectorDocumento);
         });
 
         modelBuilder.Entity<Sede>(sede =>
