@@ -14,4 +14,9 @@ app.MapGet("/", async ([FromServices] UniversidadContext context) =>
     return Results.Ok();
 });
 
+app.MapGet("/get/alumnos", async ([FromServices] UniversidadContext context) =>
+{
+    return context.Alumnos;
+});
+
 app.Run();
