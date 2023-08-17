@@ -2,6 +2,7 @@ namespace UniversidadEf.Models;
 
 public class AlumnoAsignatura
 {
+    public int AlumnoAsignaturaId { get; set; }
     public int AlumnoId { get; set; }
     public int AsignaturaId { get; set; }
     public int Semestre { get; set; }

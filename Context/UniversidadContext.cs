@@ -32,8 +32,10 @@ public class UniversidadContext : DbContext
         {
             alumnoAsignatura.ToTable("AlumnoAsignatura");
 
-            alumnoAsignatura.HasOne(e => e.Asignatura).WithMany(e => e.AlumnoAsignaturas).HasForeignKey(e => e.AsignaturaId);
-            alumnoAsignatura.HasOne(e => e.Alumno).WithMany(e => e.AlumnoAsignaturas).HasForeignKey(e => e.AlumnoId);
+            alumnoAsignatura.HasKey(e => e.AlumnoAsignaturaId);
+
+            alumnoAsignatura.HasOne(e => e.Asignatura).WithMany(e => e.AlumnoAsignaturas).HasForeignKey(e => e.AsignaturaId).OnDelete(DeleteBehavior.NoAction);
+            alumnoAsignatura.HasOne(e => e.Alumno).WithMany(e => e.AlumnoAsignaturas).HasForeignKey(e => e.AlumnoId).OnDelete(DeleteBehavior.NoAction);
             alumnoAsignatura.Property(e => e.Semestre).IsRequired();
         });
 
@@ -44,7 +46,7 @@ public class UniversidadContext : DbContext
             asignatura.HasKey(e => e.AsignaturaId);
 
             asignatura.HasOne(e => e.Profesor).WithMany(e => e.Asignaturas).HasForeignKey(e => e.ProfesorId);
-
+            asignatura.HasOne(e => e.Carrera).WithMany(e => e.Asignaturas).HasForeignKey(e => e.CarreraId);
             asignatura.Property(e => e.AsignaturaNombre).IsRequired();
             asignatura.Property(e => e.AsignaturaCreditos).IsRequired();
         });
