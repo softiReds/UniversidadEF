@@ -20,7 +20,7 @@ public class UniversidadContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         List<Alumno> alumnosInit = new List<Alumno>();
-        alumnosInit.Add(new Alumno() { AlumnoId = Guid.Parse("5131973e-a517-4c5a-91d5-d2be6d4bac32"), AlumnoDocumento = 1021669017 });
+        alumnosInit.Add(new Alumno() { AlumnoId = Guid.Parse("5131973e-a517-4c5a-91d5-d2be6d4bac32"), AlumnoDocumento = 1921874154 });
 
         modelBuilder.Entity<Alumno>(alumno =>
         {

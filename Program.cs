@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using UniversidadEF.Context;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,7 +17,7 @@ app.MapGet("/", async ([FromServices] UniversidadContext context) =>
 
 app.MapGet("/get/alumnos", async ([FromServices] UniversidadContext context) =>
 {
-    return context.Alumnos;
+    return context.Alumnos.Include(e => e.Persona);
 });
 
 app.Run();
