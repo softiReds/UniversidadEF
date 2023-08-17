@@ -4,7 +4,7 @@ namespace UniversidadEf.Models;
 
 public class Facultad
 {
-    public int FacultadId { get; set; }
+    public Guid FacultadId { get; set; }
     public string FacultadNombre { get; set; }
 
     [JsonIgnore]
