@@ -108,7 +108,7 @@ public class UniversidadContext : DbContext
 
             sede.HasKey(e => e.SedeId);
 
-            // sede.HasOne(e => e.Rector).WithOne(e => e.Sede).HasForeignKey(e => e.RectorId);
+            sede.HasOne(e => e.Rector).WithOne(e => e.Sede).HasForeignKey<Sede>(e => e.RectorId);
 
             sede.Property(e => e.SedeNombre).IsRequired();
             sede.Property(e => e.SedeDireccion).IsRequired();
