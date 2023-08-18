@@ -86,4 +86,25 @@ app.MapGet("/get/asignaturas/carr/{Id}", async ([FromServices] UniversidadContex
 });
 #endregion
 
+#region GetCarrera
+app.MapGet("/get/carrera", async ([FromServices] UniversidadContext context) =>
+{
+    return Results.Ok(context.Carreras.Include(e => e.Facultad));
+});
+
+app.MapGet("/get/carrera/id/{id}", async ([FromServices] UniversidadContext context, [FromRoute] Guid id) =>
+{
+    return Results.Ok(context.Carreras.Where(e => e.CarreraId == id).Include(e => e.Facultad));
+});
+
+app.MapGet("/get/carrera/nombre/{nombre}", async ([FromServices] UniversidadContext context, [FromRoute] string nombre) =>
+{
+    return Results.Ok(context.Carreras.Where(e => e.CarreraNombre == nombre).Include(e => e.Facultad));
+});
+
+app.MapGet("/get/carrera/facu/{id}", async ([FromServices] UniversidadContext context, [FromRoute] Guid id) =>
+{
+    return Results.Ok(context.Carreras.Where(e => e.FacultadId == id).Include(e => e.Facultad));
+});
+#endregion
 app.Run();
