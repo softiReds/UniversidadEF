@@ -126,4 +126,41 @@ app.MapGet("/get/facultades/nombre/{nombre}", async ([FromServices] UniversidadC
 });
 #endregion
 
+#region GetPersona
+app.MapGet("/get/personas", async ([FromServices] UniversidadContext context) =>
+{
+    return Results.Ok(context.Personas);
+});
+
+app.MapGet("/get/personas/doc/{documento}", async ([FromServices] UniversidadContext context, [FromRoute] int documento) =>
+{
+    return Results.Ok(context.Personas.Where(e => e.PersonaDocumento == documento));
+});
+
+app.MapGet("/get/personas/nombre/{nombre}", async ([FromServices] UniversidadContext context, [FromRoute] string nombre) =>
+{
+    return Results.Ok(context.Personas.Where(e => e.PersonaNombre == nombre));
+});
+
+app.MapGet("/get/personas/apellido/{apellido}", async ([FromServices] UniversidadContext context, [FromRoute] string apellido) =>
+{
+    return Results.Ok(context.Personas.Where(e => e.PersonaApellido == apellido));
+});
+
+app.MapGet("/get/personas/ciudad/{ciudad}", async ([FromServices] UniversidadContext context, [FromRoute] string ciudad) =>
+{
+    return Results.Ok(context.Personas.Where(e => e.PersonaCiudad == ciudad));
+});
+
+app.MapGet("/get/personas/tel/{telefono}", async ([FromServices] UniversidadContext context, [FromRoute] int telefono) =>
+{
+    return Results.Ok(context.Personas.Where(e => e.PersonaTelefono == telefono));
+});
+
+app.MapGet("/get/personas/correo/{correo}", async ([FromServices] UniversidadContext context, [FromRoute] string correo) =>
+{
+    return Results.Ok(context.Personas.Where(e => e.PersonaCorreo == correo));
+});
+#endregion
+
 app.Run();
