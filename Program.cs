@@ -107,4 +107,23 @@ app.MapGet("/get/carrera/facu/{id}", async ([FromServices] UniversidadContext co
     return Results.Ok(context.Carreras.Where(e => e.FacultadId == id).Include(e => e.Facultad));
 });
 #endregion
+
+#region GetFacultad
+
+app.MapGet("get/facultades", async ([FromServices] UniversidadContext context) =>
+{
+    return Results.Ok(context.Facultades);
+});
+
+app.MapGet("/get/facultades/id/{id}", async ([FromServices] UniversidadContext context, [FromRoute] Guid id) =>
+{
+    return Results.Ok(context.Facultades.Where(e => e.FacultadId == id));
+});
+
+app.MapGet("/get/facultades/nombre/{nombre}", async ([FromServices] UniversidadContext context, [FromRoute] string nombre) =>
+{
+    return Results.Ok(context.Facultades.Where(e => e.FacultadNombre == nombre));
+});
+#endregion
+
 app.Run();
