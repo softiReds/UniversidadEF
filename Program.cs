@@ -54,4 +54,36 @@ app.MapGet("/get/alumnoasignaturas/alumno/{idAlumno}/asignatura/{idAsignatura}",
 });
 #endregion
 
+#region GetAsignaturas
+app.MapGet("/get/asignaturas", async ([FromServices] UniversidadContext context) =>
+{
+    return Results.Ok(context.Asignaturas.Include(e => e.Profesor).Include(e => e.Carrera));
+});
+
+app.MapGet("/get/asignaturas/id/{id}", async ([FromServices] UniversidadContext context, [FromRoute] Guid id) =>
+{
+    return Results.Ok(context.Asignaturas.Where(e => e.AsignaturaId == id).Include(e => e.Profesor).Include(e => e.Carrera));
+});
+
+app.MapGet("/get/asignaturas/nombre/{nombre}", async ([FromServices] UniversidadContext context, [FromRoute] string nombre) =>
+{
+    return Results.Ok(context.Asignaturas.Where(e => e.AsignaturaNombre == nombre).Include(e => e.Profesor).Include(e => e.Carrera));
+});
+
+app.MapGet("/get/asignaturas/cred/{creditos}", async ([FromServices] UniversidadContext context, [FromRoute] int creditos) =>
+{
+    return Results.Ok(context.Asignaturas.Where(e => e.AsignaturaCreditos == creditos).Include(e => e.Profesor).Include(e => e.Carrera));
+});
+
+app.MapGet("/get/asignaturas/prof/{Id}", async ([FromServices] UniversidadContext context, [FromRoute] Guid id) =>
+{
+    return Results.Ok(context.Asignaturas.Where(e => e.ProfesorId == id).Include(e => e.Profesor).Include(e => e.Carrera));
+});
+
+app.MapGet("/get/asignaturas/carr/{Id}", async ([FromServices] UniversidadContext context, [FromRoute] Guid id) =>
+{
+    return Results.Ok(context.Asignaturas.Where(e => e.CarreraId == id).Include(e => e.Profesor).Include(e => e.Carrera));
+});
+#endregion
+
 app.Run();
