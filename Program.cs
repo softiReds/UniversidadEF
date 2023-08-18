@@ -180,4 +180,21 @@ app.MapGet("/get/profesores/doc/{documento}", async ([FromServices] UniversidadC
 });
 #endregion
 
+#region GetRectores
+app.MapGet("/get/rectores", async ([FromServices] UniversidadContext context) =>
+{
+    return Results.Ok(context.Rectores.Include(e => e.Persona));
+});
+
+app.MapGet("/get/rectores/id/{id}", async ([FromServices] UniversidadContext context, [FromRoute] Guid id) =>
+{
+    return Results.Ok(context.Rectores.Where(e => e.RectorId == id).Include(e => e.Persona));
+});
+
+app.MapGet("/get/rectores/doc/{documento}", async ([FromServices] UniversidadContext context, [FromRoute] int documento) =>
+{
+    return Results.Ok(context.Rectores.Where(e => e.RectorDocumento == documento).Include(e => e.Persona));
+});
+#endregion
+
 app.Run();
