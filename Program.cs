@@ -86,7 +86,7 @@ app.MapGet("/get/asignaturas/carr/{Id}", async ([FromServices] UniversidadContex
 });
 #endregion
 
-#region GetCarrera
+#region GetCarreras
 app.MapGet("/get/carrera", async ([FromServices] UniversidadContext context) =>
 {
     return Results.Ok(context.Carreras.Include(e => e.Facultad));
@@ -126,7 +126,7 @@ app.MapGet("/get/facultades/nombre/{nombre}", async ([FromServices] UniversidadC
 });
 #endregion
 
-#region GetPersona
+#region GetPersonas
 app.MapGet("/get/personas", async ([FromServices] UniversidadContext context) =>
 {
     return Results.Ok(context.Personas);
@@ -160,6 +160,23 @@ app.MapGet("/get/personas/tel/{telefono}", async ([FromServices] UniversidadCont
 app.MapGet("/get/personas/correo/{correo}", async ([FromServices] UniversidadContext context, [FromRoute] string correo) =>
 {
     return Results.Ok(context.Personas.Where(e => e.PersonaCorreo == correo));
+});
+#endregion
+
+#region GetProfesores
+app.MapGet("/get/profesores", async ([FromServices] UniversidadContext context) =>
+{
+    return Results.Ok(context.Profesores.Include(e => e.Persona));
+});
+
+app.MapGet("/get/profesores/id/{id}", async ([FromServices] UniversidadContext context, [FromRoute] Guid id) =>
+{
+    return Results.Ok(context.Profesores.Where(e => e.ProfesorId == id).Include(e => e.Persona));
+});
+
+app.MapGet("/get/profesores/doc/{documento}", async ([FromServices] UniversidadContext context, [FromRoute] int documento) =>
+{
+    return Results.Ok(context.Profesores.Where(e => e.ProfesorDocumento == documento).Include(e => e.Persona));
 });
 #endregion
 
