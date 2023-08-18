@@ -17,7 +17,17 @@ app.MapGet("/", async ([FromServices] UniversidadContext context) =>
 
 app.MapGet("/get/alumnos", async ([FromServices] UniversidadContext context) =>
 {
-    return context.Alumnos.Include(e => e.Persona);
+    return Results.Ok(context.Alumnos.Include(e => e.Persona));
+});
+
+app.MapGet("/get/alumnos/id/{id}", async ([FromServices] UniversidadContext context, [FromRoute] Guid id) =>
+{
+    return Results.Ok(context.Alumnos.Find(id));
+});
+
+app.MapGet("/get/alumnos/doc/{documento}", async ([FromServices] UniversidadContext context, [FromRoute] int documento) =>
+{
+    return Results.Ok(context.Alumnos.Where(e => e.AlumnoDocumento == documento));
 });
 
 app.Run();
