@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using UniversidadEf.Models;
 using UniversidadEF.Context;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -216,6 +217,16 @@ app.MapGet("/get/sedes/nombre/{nombre}", async ([FromServices] UniversidadContex
 app.MapGet("/get/sedes/dir/{direccion}", async ([FromServices] UniversidadContext cotext, [FromRoute] string direccion) =>
 {
     return Results.Ok(cotext.Sedes.Where(e => e.SedeDireccion == direccion));
+});
+#endregion
+
+#region PostPersona
+app.MapPost("/post/personas", async ([FromServices] UniversidadContext context, [FromBody] Persona persona) =>
+{
+    await context.Personas.AddAsync(persona);
+    await context.SaveChangesAsync();
+
+    return Results.Ok();
 });
 #endregion
 
