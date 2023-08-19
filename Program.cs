@@ -197,4 +197,26 @@ app.MapGet("/get/rectores/doc/{documento}", async ([FromServices] UniversidadCon
 });
 #endregion
 
+#region GetSedes
+app.MapGet("/get/sedes", async ([FromServices] UniversidadContext cotext) =>
+{
+    return Results.Ok(cotext.Sedes);
+});
+
+app.MapGet("/get/sedes/id/{id}", async ([FromServices] UniversidadContext cotext, [FromRoute] Guid id) =>
+{
+    return Results.Ok(cotext.Sedes.Where(e => e.SedeId == id));
+});
+
+app.MapGet("/get/sedes/nombre/{nombre}", async ([FromServices] UniversidadContext cotext, [FromRoute] string nombre) =>
+{
+    return Results.Ok(cotext.Sedes.Where(e => e.SedeNombre == nombre));
+});
+
+app.MapGet("/get/sedes/dir/{direccion}", async ([FromServices] UniversidadContext cotext, [FromRoute] string direccion) =>
+{
+    return Results.Ok(cotext.Sedes.Where(e => e.SedeDireccion == direccion));
+});
+#endregion
+
 app.Run();
