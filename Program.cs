@@ -27,9 +27,9 @@ app.MapGet("/get/alumnos/id/{id}", async ([FromServices] UniversidadContext cont
     return Results.Ok(context.Alumnos.Find(id));
 });
 
-app.MapGet("/get/alumnos/doc/{documento}", async ([FromServices] UniversidadContext context, [FromRoute] int documento) =>
+app.MapGet("/get/alumnos/persona/{id}", async ([FromServices] UniversidadContext context, [FromRoute] Guid id) =>
 {
-    return Results.Ok(context.Alumnos.Where(e => e.AlumnoDocumento == documento));
+    return Results.Ok(context.Alumnos.Where(e => e.PersonaId == id));
 });
 #endregion
 
@@ -175,9 +175,9 @@ app.MapGet("/get/profesores/id/{id}", async ([FromServices] UniversidadContext c
     return Results.Ok(context.Profesores.Where(e => e.ProfesorId == id).Include(e => e.Persona));
 });
 
-app.MapGet("/get/profesores/doc/{documento}", async ([FromServices] UniversidadContext context, [FromRoute] int documento) =>
+app.MapGet("/get/profesores/persona/{id}", async ([FromServices] UniversidadContext context, [FromRoute] Guid id) =>
 {
-    return Results.Ok(context.Profesores.Where(e => e.ProfesorDocumento == documento).Include(e => e.Persona));
+    return Results.Ok(context.Profesores.Where(e => e.PersonaId == id).Include(e => e.Persona));
 });
 #endregion
 
@@ -192,9 +192,9 @@ app.MapGet("/get/rectores/id/{id}", async ([FromServices] UniversidadContext con
     return Results.Ok(context.Rectores.Where(e => e.RectorId == id).Include(e => e.Persona));
 });
 
-app.MapGet("/get/rectores/doc/{documento}", async ([FromServices] UniversidadContext context, [FromRoute] int documento) =>
+app.MapGet("/get/rectores/persona/{id}", async ([FromServices] UniversidadContext context, [FromRoute] Guid id) =>
 {
-    return Results.Ok(context.Rectores.Where(e => e.RectorDocumento == documento).Include(e => e.Persona));
+    return Results.Ok(context.Rectores.Where(e => e.PersonaId == id).Include(e => e.Persona));
 });
 #endregion
 
