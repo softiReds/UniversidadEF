@@ -20,7 +20,7 @@ public class UniversidadContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         List<Alumno> alumnosInit = new List<Alumno>();
-        alumnosInit.Add(new Alumno() { AlumnoId = Guid.Parse("5131973e-a517-4c5a-91d5-d2be6d4bac32"), AlumnoDocumento = 1921874154 });
+        alumnosInit.Add(new Alumno() { AlumnoId = Guid.Parse("5131973e-a517-4c5a-91d5-d2be6d4bac32"), PersonaId = Guid.Parse("ec4edb8d-4f84-4aea-aebc-a60f98810c43") });
 
         modelBuilder.Entity<Alumno>(alumno =>
         {
@@ -28,7 +28,7 @@ public class UniversidadContext : DbContext
 
             alumno.HasKey(e => e.AlumnoId);
 
-            alumno.HasOne(e => e.Persona).WithOne(e => e.Alumno).HasForeignKey<Alumno>(e => e.AlumnoDocumento);
+            alumno.HasOne(e => e.Persona).WithOne(e => e.Alumno).HasForeignKey<Alumno>(e => e.PersonaId);
 
             alumno.HasData(alumnosInit);
         });
@@ -93,16 +93,17 @@ public class UniversidadContext : DbContext
         });
 
         List<Persona> personasInit = new List<Persona>();
-        personasInit.Add(new Persona() { PersonaDocumento = 1921874154, PersonaNombre = "Santiago", PersonaApellido = "Rojas", PersonaCiudad = "Bogotá", PersonaTelefono = 300900400, PersonaCorreo = "srojas@uan.edu.co", PersonaFechaNacimiento = Convert.ToDateTime("14/05/2005 00:00:00 AM"), PersonaGenero = 'M' });
-        personasInit.Add(new Persona() { PersonaDocumento = 58132098, PersonaNombre = "Juan", PersonaApellido = "Martinez", PersonaCiudad = "Bogotá", PersonaTelefono = 300900401, PersonaCorreo = "jcmartinezd@uan.edu.co", PersonaFechaNacimiento = Convert.ToDateTime("11/10/1976 00:00:00 AM"), PersonaGenero = 'M' });
-        personasInit.Add(new Persona() { PersonaDocumento = 78234085, PersonaNombre = "Andrea", PersonaApellido = "Sarmiento", PersonaCiudad = "Bogotá", PersonaTelefono = 300900402, PersonaCorreo = "asarmiento@uan.edu.co", PersonaFechaNacimiento = Convert.ToDateTime("11/10/1976 00:00:00 AM"), PersonaGenero = 'F' });
+        personasInit.Add(new Persona() { PersonaId = Guid.Parse("ec4edb8d-4f84-4aea-aebc-a60f98810c43"), PersonaDocumento = 1921874154, PersonaNombre = "Santiago", PersonaApellido = "Rojas", PersonaCiudad = "Bogotá", PersonaTelefono = 300900400, PersonaCorreo = "srojas@uan.edu.co", PersonaFechaNacimiento = Convert.ToDateTime("14/05/2005 00:00:00 AM"), PersonaGenero = 'M' });
+        personasInit.Add(new Persona() { PersonaId = Guid.Parse("9505c0e7-2707-4f5e-a760-2cad68c82cd4"), PersonaDocumento = 58132098, PersonaNombre = "Juan", PersonaApellido = "Martinez", PersonaCiudad = "Bogotá", PersonaTelefono = 300900401, PersonaCorreo = "jcmartinezd@uan.edu.co", PersonaFechaNacimiento = Convert.ToDateTime("11/10/1976 00:00:00 AM"), PersonaGenero = 'M' });
+        personasInit.Add(new Persona() { PersonaId = Guid.Parse("4b75643d-6fdc-49a8-97b6-897e9452c0fc"), PersonaDocumento = 78234085, PersonaNombre = "Andrea", PersonaApellido = "Sarmiento", PersonaCiudad = "Bogotá", PersonaTelefono = 300900402, PersonaCorreo = "asarmiento@uan.edu.co", PersonaFechaNacimiento = Convert.ToDateTime("11/10/1976 00:00:00 AM"), PersonaGenero = 'F' });
 
         modelBuilder.Entity<Persona>(persona =>
         {
             persona.ToTable("Persona");
 
-            persona.HasKey(e => e.PersonaDocumento);
+            persona.HasKey(e => e.PersonaId);
 
+            persona.Property(e => e.PersonaDocumento).IsRequired();
             persona.Property(e => e.PersonaNombre).IsRequired().HasMaxLength(150);
             persona.Property(e => e.PersonaApellido).IsRequired().HasMaxLength(150);
             persona.Property(e => e.PersonaCiudad).IsRequired().HasMaxLength(80);
@@ -115,27 +116,27 @@ public class UniversidadContext : DbContext
         });
 
         List<Profesor> profesoresInit = new List<Profesor>();
-        profesoresInit.Add(new Profesor() { ProfesorId = Guid.Parse("920e874c-9eec-4c08-9507-485a9175b31c"), ProfesorDocumento = 58132098 });
+        profesoresInit.Add(new Profesor() { ProfesorId = Guid.Parse("920e874c-9eec-4c08-9507-485a9175b31c"), PersonaId = Guid.Parse("9505c0e7-2707-4f5e-a760-2cad68c82cd4") });
         modelBuilder.Entity<Profesor>(profesor =>
         {
             profesor.ToTable("Profesor");
 
             profesor.HasKey(e => e.ProfesorId);
 
-            profesor.HasOne(e => e.Persona).WithOne(e => e.Profesor).HasForeignKey<Profesor>(e => e.ProfesorDocumento);
+            profesor.HasOne(e => e.Persona).WithOne(e => e.Profesor).HasForeignKey<Profesor>(e => e.PersonaId);
 
             profesor.HasData(profesoresInit);
         });
 
         List<Rector> rectoresInit = new List<Rector>();
-        rectoresInit.Add(new Rector() { RectorId = Guid.Parse("531d2123-2836-4720-8d15-313c4aeda145"), RectorDocumento = 78234085 });
+        rectoresInit.Add(new Rector() { RectorId = Guid.Parse("531d2123-2836-4720-8d15-313c4aeda145"), PersonaId = Guid.Parse("4b75643d-6fdc-49a8-97b6-897e9452c0fc") });
         modelBuilder.Entity<Rector>(rector =>
         {
             rector.ToTable("Rector");
 
             rector.HasKey(e => e.RectorId);
 
-            rector.HasOne(e => e.Persona).WithOne(e => e.Rector).HasForeignKey<Rector>(e => e.RectorDocumento);
+            rector.HasOne(e => e.Persona).WithOne(e => e.Rector).HasForeignKey<Rector>(e => e.PersonaId);
 
             rector.HasData(rectoresInit);
         });
