@@ -223,6 +223,8 @@ app.MapGet("/get/sedes/dir/{direccion}", async ([FromServices] UniversidadContex
 #region PostPersona
 app.MapPost("/post/personas", async ([FromServices] UniversidadContext context, [FromBody] Persona persona) =>
 {
+    persona.PersonaId = Guid.NewGuid();
+
     await context.Personas.AddAsync(persona);
     await context.SaveChangesAsync();
 
