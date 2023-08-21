@@ -4,6 +4,7 @@ namespace UniversidadEf.Models;
 
 public class Persona
 {
+    public Guid PersonaId { get; set; }
     public int PersonaDocumento { get; set; }
     public string PersonaNombre { get; set; }
     public string PersonaApellido { get; set; }

@@ -5,7 +5,7 @@ namespace UniversidadEf.Models;
 public class Profesor
 {
     public Guid ProfesorId { get; set; }
-    public int ProfesorDocumento { get; set; }
+    public Guid PersonaId { get; set; }
 
     public virtual Persona Persona { get; set; }
 
