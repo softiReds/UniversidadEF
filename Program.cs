@@ -268,4 +268,16 @@ app.MapPost("/post/sedes", async ([FromServices] UniversidadContext context, [Fr
 });
 #endregion
 
+#region PostProfesor
+app.MapPost("/post/profesores", async ([FromServices] UniversidadContext context, [FromBody] Profesor profesor) =>
+{
+    profesor.ProfesorId = Guid.NewGuid();
+
+    await context.Profesores.AddAsync(profesor);
+    await context.SaveChangesAsync();
+
+    return Results.Ok();
+});
+#endregion
+
 app.Run();
