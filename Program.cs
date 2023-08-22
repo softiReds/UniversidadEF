@@ -280,4 +280,16 @@ app.MapPost("/post/profesores", async ([FromServices] UniversidadContext context
 });
 #endregion
 
+#region PostAsignatura
+app.MapPost("/post/asignaturas", async ([FromServices] UniversidadContext context, [FromBody] Asignatura asignatura) =>
+{
+    asignatura.AsignaturaId = Guid.NewGuid();
+
+    await context.Asignaturas.AddAsync(asignatura);
+    await context.SaveChangesAsync();
+
+    return Results.Ok();
+});
+#endregion
+
 app.Run();
