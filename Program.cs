@@ -316,4 +316,16 @@ app.MapPost("/post/carreras", async ([FromServices] UniversidadContext context, 
 });
 #endregion
 
+#region PostAlumnoAsignatura
+app.MapPost("/post/alumnoasignaturas", async ([FromServices] UniversidadContext context, [FromBody] AlumnoAsignatura alumnoAsignatura) =>
+{
+    alumnoAsignatura.AlumnoAsignaturaId = Guid.NewGuid();
+
+    await context.AlumnoAsignaturas.AddAsync(alumnoAsignatura);
+    await context.SaveChangesAsync();
+
+    return Results.Ok();
+});
+#endregion
+
 app.Run();
