@@ -88,22 +88,22 @@ app.MapGet("/get/asignaturas/carr/{Id}", async ([FromServices] UniversidadContex
 #endregion
 
 #region GetCarreras
-app.MapGet("/get/carrera", async ([FromServices] UniversidadContext context) =>
+app.MapGet("/get/carreras", async ([FromServices] UniversidadContext context) =>
 {
     return Results.Ok(context.Carreras.Include(e => e.Facultad));
 });
 
-app.MapGet("/get/carrera/id/{id}", async ([FromServices] UniversidadContext context, [FromRoute] Guid id) =>
+app.MapGet("/get/carreras/id/{id}", async ([FromServices] UniversidadContext context, [FromRoute] Guid id) =>
 {
     return Results.Ok(context.Carreras.Where(e => e.CarreraId == id).Include(e => e.Facultad));
 });
 
-app.MapGet("/get/carrera/nombre/{nombre}", async ([FromServices] UniversidadContext context, [FromRoute] string nombre) =>
+app.MapGet("/get/carreras/nombre/{nombre}", async ([FromServices] UniversidadContext context, [FromRoute] string nombre) =>
 {
     return Results.Ok(context.Carreras.Where(e => e.CarreraNombre == nombre).Include(e => e.Facultad));
 });
 
-app.MapGet("/get/carrera/facu/{id}", async ([FromServices] UniversidadContext context, [FromRoute] Guid id) =>
+app.MapGet("/get/carreras/facu/{id}", async ([FromServices] UniversidadContext context, [FromRoute] Guid id) =>
 {
     return Results.Ok(context.Carreras.Where(e => e.FacultadId == id).Include(e => e.Facultad));
 });
@@ -286,6 +286,18 @@ app.MapPost("/post/asignaturas", async ([FromServices] UniversidadContext contex
     asignatura.AsignaturaId = Guid.NewGuid();
 
     await context.Asignaturas.AddAsync(asignatura);
+    await context.SaveChangesAsync();
+
+    return Results.Ok();
+});
+#endregion
+
+#region PostCarrera
+app.MapPost("/post/carreras", async ([FromServices] UniversidadContext context, [FromBody] Carrera carrera) =>
+{
+    carrera.CarreraId = Guid.NewGuid();
+
+    await context.Carreras.AddAsync(carrera);
     await context.SaveChangesAsync();
 
     return Results.Ok();
