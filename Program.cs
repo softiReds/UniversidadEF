@@ -256,4 +256,16 @@ app.MapPost("/post/rectores", async ([FromServices] UniversidadContext context, 
 });
 #endregion
 
+#region PostSede
+app.MapPost("/post/sedes", async ([FromServices] UniversidadContext context, [FromBody] Sede sede) =>
+{
+    sede.SedeId = Guid.NewGuid();
+
+    await context.Sedes.AddAsync(sede);
+    await context.SaveChangesAsync();
+
+    return Results.Ok();
+});
+#endregion
+
 app.Run();
