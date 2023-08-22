@@ -232,4 +232,16 @@ app.MapPost("/post/personas", async ([FromServices] UniversidadContext context, 
 });
 #endregion
 
+#region PostAlumno
+app.MapPost("/post/alumnos", async ([FromServices] UniversidadContext context, [FromBody] Alumno alumno) =>
+{
+    alumno.AlumnoId = Guid.NewGuid();
+
+    await context.Alumnos.AddAsync(alumno);
+    await context.SaveChangesAsync();
+
+    return Results.Ok();
+});
+#endregion
+
 app.Run();
