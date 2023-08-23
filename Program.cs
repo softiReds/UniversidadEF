@@ -328,4 +328,28 @@ app.MapPost("/post/alumnoasignaturas", async ([FromServices] UniversidadContext 
 });
 #endregion
 
+#region PutPersona
+app.MapPut("/put/personas/{id}", async ([FromServices] UniversidadContext context, [FromBody] Persona persona, [FromRoute] Guid id) =>
+{
+    Persona personaActual = context.Personas.Find(id);
+
+    if (personaActual != null)
+    {
+        personaActual.PersonaDocumento = persona.PersonaDocumento;
+        personaActual.PersonaNombre = persona.PersonaNombre;
+        personaActual.PersonaApellido = persona.PersonaApellido;
+        personaActual.PersonaCiudad = persona.PersonaCiudad;
+        personaActual.PersonaTelefono = persona.PersonaTelefono;
+        personaActual.PersonaCorreo = persona.PersonaCorreo;
+        personaActual.PersonaFechaNacimiento = persona.PersonaFechaNacimiento;
+        personaActual.PersonaGenero = persona.PersonaGenero;
+
+        await context.SaveChangesAsync();
+
+        return Results.Ok();
+    }
+
+    return Results.NotFound();
+});
+#endregion
 app.Run();
