@@ -9,6 +9,7 @@ builder.Services.AddSqlServer<UniversidadContext>(builder.Configuration.GetConne
 
 var app = builder.Build();
 
+#region Get
 #region GetAlumnos
 app.MapGet("/", async ([FromServices] UniversidadContext context) =>
 {
@@ -219,7 +220,9 @@ app.MapGet("/get/sedes/dir/{direccion}", async ([FromServices] UniversidadContex
     return Results.Ok(cotext.Sedes.Where(e => e.SedeDireccion == direccion));
 });
 #endregion
+#endregion
 
+#region Post
 #region PostPersona
 app.MapPost("/post/personas", async ([FromServices] UniversidadContext context, [FromBody] Persona persona) =>
 {
@@ -327,7 +330,9 @@ app.MapPost("/post/alumnoasignaturas", async ([FromServices] UniversidadContext 
     return Results.Ok();
 });
 #endregion
+#endregion
 
+#region Put
 #region PutPersona
 app.MapPut("/put/personas/{id}", async ([FromServices] UniversidadContext context, [FromBody] Persona persona, [FromRoute] Guid id) =>
 {
@@ -372,4 +377,25 @@ app.MapPut("/put/alumnoasignaturas/{id}", async ([FromServices] UniversidadConte
 });
 #endregion
 
+#region PutAsignatura
+app.MapPut("/put/asignaturas/{id}", async ([FromServices] UniversidadContext context, [FromBody] Asignatura asignatura, [FromRoute] Guid id) =>
+{
+    Asignatura asignaturaActual = context.Asignaturas.Find(id);
+
+    if (asignaturaActual != null)
+    {
+        asignaturaActual.AsignaturaNombre = asignatura.AsignaturaNombre;
+        asignaturaActual.AsignaturaCreditos = asignatura.AsignaturaCreditos;
+        asignaturaActual.ProfesorId = asignatura.ProfesorId;
+        asignaturaActual.CarreraId = asignatura.CarreraId;
+
+        await context.SaveChangesAsync();
+
+        return Results.Ok();
+    }
+
+    return Results.NotFound();
+});
+#endregion
+#endregion
 app.Run();
