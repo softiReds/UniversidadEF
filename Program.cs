@@ -397,5 +397,24 @@ app.MapPut("/put/asignaturas/{id}", async ([FromServices] UniversidadContext con
     return Results.NotFound();
 });
 #endregion
+
+#region PutCarrera
+app.MapPut("/put/carreras/{id}", async ([FromServices] UniversidadContext context, [FromBody] Carrera carrera, [FromRoute] Guid id) =>
+{
+    Carrera carreraActual = context.Carreras.Find(id);
+
+    if (carreraActual != null)
+    {
+        carreraActual.CarreraNombre = carrera.CarreraNombre;
+        carreraActual.FacultadId = carrera.FacultadId;
+
+        await context.SaveChangesAsync();
+
+        return Results.Ok();
+    }
+
+    return Results.NotFound();
+});
+#endregion
 #endregion
 app.Run();
