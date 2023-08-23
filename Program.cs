@@ -352,4 +352,24 @@ app.MapPut("/put/personas/{id}", async ([FromServices] UniversidadContext contex
     return Results.NotFound();
 });
 #endregion
+
+#region PutAlumnoAsignatura
+app.MapPut("/put/alumnoasignaturas/{id}", async ([FromServices] UniversidadContext context, [FromBody] AlumnoAsignatura alumnoAsignatura, [FromRoute] Guid id) =>
+{
+    AlumnoAsignatura alumnoAsignaturaActual = context.AlumnoAsignaturas.Find(id);
+
+    if (alumnoAsignaturaActual != null)
+    {
+        alumnoAsignaturaActual.AsignaturaId = alumnoAsignatura.AsignaturaId;
+        alumnoAsignaturaActual.Semestre = alumnoAsignatura.Semestre;
+
+        await context.SaveChangesAsync();
+
+        return Results.Ok();
+    }
+
+    return Results.NotFound();
+});
+#endregion
+
 app.Run();
