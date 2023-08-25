@@ -531,6 +531,25 @@ app.MapDelete("/delete/facultades/{id}", async ([FromServices] UniversidadContex
     return Results.NotFound();
 });
 #endregion
+
+#region DeleteSede
+app.MapDelete("/delete/sedes/{id}", async ([FromServices] UniversidadContext context, [FromRoute] Guid id) =>
+{
+    Sede sede = context.Sedes.Find(id);
+
+    if (sede != null)
+    {
+        context.Remove(sede);
+
+        await context.SaveChangesAsync();
+
+        return Results.Ok();
+    }
+
+    return Results.NotFound();
+});
+#endregion
+
 #endregion
 
 app.Run();
