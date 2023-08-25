@@ -495,6 +495,24 @@ app.MapDelete("/delete/asignaturas/{id}", async ([FromServices] UniversidadConte
     return Results.NotFound();
 });
 #endregion
+
+#region DelteCarrera
+app.MapDelete("/delete/carreras/{id}", async ([FromServices] UniversidadContext context, [FromRoute] Guid id) =>
+{
+    Carrera carrera = context.Carreras.Find(id);
+
+    if (carrera != null)
+    {
+        context.Remove(carrera);
+
+        await context.SaveChangesAsync();
+
+        return Results.Ok();
+    }
+
+    return Results.Ok();
+});
+#endregion
 #endregion
 
 app.Run();
