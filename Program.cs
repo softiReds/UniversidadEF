@@ -454,6 +454,26 @@ app.MapPut("/put/sedes/{id}", async ([FromServices] UniversidadContext context, 
     return Results.NotFound();
 });
 #endregion
-
 #endregion
+
+#region Delete
+#region DeletePersona
+app.MapDelete("/delete/personas/{id}", async ([FromServices] UniversidadContext context, [FromRoute] Guid id) =>
+{
+    Persona persona = context.Personas.Find(id);
+
+    if (persona != null)
+    {
+        context.Remove(persona);
+
+        await context.SaveChangesAsync();
+
+        return Results.Ok();
+    }
+
+    return Results.NotFound();
+});
+#endregion
+#endregion
+
 app.Run();
