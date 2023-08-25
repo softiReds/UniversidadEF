@@ -346,13 +346,13 @@ namespace UniversidadEF.Migrations
                     b.HasOne("UniversidadEf.Models.Alumno", "Alumno")
                         .WithMany("AlumnoAsignaturas")
                         .HasForeignKey("AlumnoId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.SetNull)
                         .IsRequired();
 
                     b.HasOne("UniversidadEf.Models.Asignatura", "Asignatura")
                         .WithMany("AlumnoAsignaturas")
                         .HasForeignKey("AsignaturaId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.SetNull)
                         .IsRequired();
 
                     b.Navigation("Alumno");

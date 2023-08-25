@@ -474,6 +474,27 @@ app.MapDelete("/delete/personas/{id}", async ([FromServices] UniversidadContext 
     return Results.NotFound();
 });
 #endregion
+
+#region DeleteAsignatura
+app.MapDelete("/delete/asignaturas/{id}", async ([FromServices] UniversidadContext context, [FromRoute] Guid id) =>
+{
+    Asignatura asignatura = context.Asignaturas.Find(id);
+    var fk1 = context.AlumnoAsignaturas.Where(e => e.AsignaturaId == id);
+
+    if (fk1 != null) context.RemoveRange(fk1);
+
+    if (asignatura != null)
+    {
+        context.Remove(asignatura);
+
+        await context.SaveChangesAsync();
+
+        return Results.Ok();
+    }
+
+    return Results.NotFound();
+});
+#endregion
 #endregion
 
 app.Run();

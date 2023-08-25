@@ -43,7 +43,7 @@ public class UniversidadContext : DbContext
 
             alumnoAsignatura.HasOne(e => e.Asignatura).WithMany(e => e.AlumnoAsignaturas).HasForeignKey(e => e.AsignaturaId).OnDelete(DeleteBehavior.NoAction);
             alumnoAsignatura.HasOne(e => e.Alumno).WithMany(e => e.AlumnoAsignaturas).HasForeignKey(e => e.AlumnoId).OnDelete(DeleteBehavior.NoAction);
-            alumnoAsignatura.Property(e => e.Semestre).IsRequired();
+            alumnoAsignatura.Property(e => e.Semestre);
 
             alumnoAsignatura.HasData(alumnosAsignaturaInit);
         });
